@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">StoryApp</string>
+    <string name="hint_form_name">Masukkan nama anda</string>
+    <string name="hint_form_email">Masukkan email anda</string>
+    <string name="hint_form_password">Masukkan password anda</string>
+    <string name="button_register">Daftar</string>
+    <string name="text_form_error">Kolom ini tidak boleh kosong</string>
+    <string name="button_login">LOGIN</string>
+    <string name="hint_login_password">password</string>
+    <string name="hint_login_email">email</string>
+</resources>
