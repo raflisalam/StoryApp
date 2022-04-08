@@ -20,6 +20,7 @@ class PasswordForm @JvmOverloads constructor(context: Context, attrs: AttributeS
         super.onDraw(canvas)
         background = backgroundForm
         textSize = 14f
+
         setTextColor(txtColor)
     }
 
@@ -37,11 +38,11 @@ class PasswordForm @JvmOverloads constructor(context: Context, attrs: AttributeS
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val text = s.toString()
-                setErrorPassword(text)
             }
 
             override fun afterTextChanged(s: Editable?) {
+                val text = s.toString()
+                setErrorPassword(text)
             }
 
         })

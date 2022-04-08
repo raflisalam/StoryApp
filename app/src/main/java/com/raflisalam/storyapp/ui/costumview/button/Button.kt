@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Gravity
+import android.widget.ProgressBar
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import com.raflisalam.storyapp.R

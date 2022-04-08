@@ -1,14 +1,9 @@
 package com.raflisalam.storyapp.ui
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
-import androidx.lifecycle.ViewModelProvider
+import androidx.appcompat.app.AppCompatActivity
 import com.raflisalam.storyapp.databinding.ActivityHomeBinding
-import com.raflisalam.storyapp.model.login.LoginResult
-import com.raflisalam.storyapp.repository.Repository
-import com.raflisalam.storyapp.viewmodel.post.register.RegisterViewModel
-import com.raflisalam.storyapp.viewmodel.post.register.RegisterViewModelFactory
 
 class HomeActivity : AppCompatActivity() {
 
@@ -19,17 +14,23 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        getParcelableData()
+        Logout()
     }
 
-    private fun getParcelableData() {
-        val data: LoginResult = intent.getParcelableExtra<LoginResult>(LOGIN_RESULT) as LoginResult
-        binding.tesResult.text = data.name
-        Log.d("isian", data.name.toString())
+    private fun Logout() {
+        binding.btnLogout.setOnClickListener {
+            val logoutPref = getSharedPreferences(NAME_KEY_SESSION, MODE_PRIVATE)
+            val session: SharedPreferences.Editor = logoutPref.edit()
+            session.putString(KEY_SESSION, "false")
+            session.apply()
+            finish()
+        }
     }
 
     companion object {
-        const val LOGIN_RESULT = "response"
+        private const val NAME_KEY_SESSION = "user_session"
+        private const val KEY_SESSION = "session"
     }
+
 
 }

@@ -5,7 +5,7 @@
     <string name="hint_form_password">Masukkan password anda</string>
     <string name="button_register">Daftar</string>
     <string name="text_form_error">Kolom ini tidak boleh kosong</string>
-    <string name="button_login">LOGIN</string>
+    <string name="button_login">Masuk</string>
     <string name="hint_login_password">password</string>
     <string name="hint_login_email">email</string>
 </resources>

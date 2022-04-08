@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.Patterns
@@ -31,7 +32,6 @@ class EmailForm @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         txtColor = ContextCompat.getColor(context, R.color.font)
         backgroundForm = ContextCompat.getDrawable(context, R.drawable.bg_form) as Drawable
         clearTextButton = ContextCompat.getDrawable(context, R.drawable.ic_clear) as Drawable
-
         setOnTouchListener(this)
         setupTextChangedListener()
     }
@@ -48,7 +48,7 @@ class EmailForm @JvmOverloads constructor(context: Context, attrs: AttributeSet?
             override fun afterTextChanged(s: Editable?) {
                 val email = s.toString()
                 if (email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    Toast.makeText(context,"Valid email address",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"Valid email address",Toast.LENGTH_SHORT).show()
                 } else {
                     error = "Format email salah"
                 }

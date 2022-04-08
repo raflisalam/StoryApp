@@ -1,15 +1,9 @@
 package com.raflisalam.storyapp.repository
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.raflisalam.storyapp.api.ApiClient
-import com.raflisalam.storyapp.model.login.LoginUser
 import com.raflisalam.storyapp.model.RegisterUser
 import com.raflisalam.storyapp.model.login.LoginResponse
-import com.raflisalam.storyapp.model.login.LoginResult
-import retrofit2.Call
-import retrofit2.Callback
+import com.raflisalam.storyapp.model.login.LoginUser
 import retrofit2.Response
 
 class Repository {
