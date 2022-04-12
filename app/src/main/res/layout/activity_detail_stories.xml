@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.detail.DetailStoriesActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/icUser"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_user"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:transitionName="profile"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/nameUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:textSize="14sp"
+            android:text="Muhammad Rafli Salam"
+            android:textColor="#181818"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:transitionName="name"
+            app:layout_constraintTop_toTopOf="@id/icUser"
+            app:layout_constraintStart_toEndOf="@+id/icUser"
+            app:layout_constraintBottom_toBottomOf="@id/icUser"/>
+
+        <ImageView
+            android:id="@+id/photoStories"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_marginTop="10dp"
+            android:scaleType="center"
+            android:transitionName="photo"
+            app:layout_constraintTop_toBottomOf="@+id/icUser"/>
+
+        <ImageView
+            android:id="@+id/icLike"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_heart"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="8dp"
+            android:transitionName="iconLike"
+            app:layout_constraintTop_toBottomOf="@+id/photoStories"
+            app:layout_constraintStart_toStartOf="@id/photoStories"/>
+
+        <TextView
+            android:id="@+id/likes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="#f05542"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:transitionName="likes"
+            app:layout_constraintTop_toTopOf="@id/icLike"
+            app:layout_constraintBottom_toBottomOf="@id/icLike"
+            app:layout_constraintStart_toEndOf="@id/icLike"/>
+
+        <ImageView
+            android:id="@+id/icComment"
+            android:layout_width="24dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_comment"
+            android:layout_marginStart="15dp"
+            android:transitionName="iconComment"
+            app:layout_constraintTop_toTopOf="@id/icLike"
+            app:layout_constraintStart_toEndOf="@id/likes"
+            app:layout_constraintBottom_toBottomOf="@id/icLike"/>
+
+        <TextView
+            android:id="@+id/comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="#81AAE7"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:transitionName="comment"
+            app:layout_constraintTop_toTopOf="@id/icComment"
+            app:layout_constraintBottom_toBottomOf="@id/icComment"
+            app:layout_constraintStart_toEndOf="@id/icComment"/>
+
+        <TextView
+            android:id="@+id/descStories"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_medium"
+            android:justificationMode="inter_word"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:transitionName="desc"
+            app:layout_constraintTop_toBottomOf="@id/icLike"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/timeUpload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#808080"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="6dp"
+            android:transitionName="time"
+            app:layout_constraintTop_toBottomOf="@id/descStories"
+            app:layout_constraintStart_toStartOf="@id/descStories"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

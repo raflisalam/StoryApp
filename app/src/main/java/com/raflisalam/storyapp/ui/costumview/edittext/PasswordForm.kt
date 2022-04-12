@@ -51,8 +51,6 @@ class PasswordForm @JvmOverloads constructor(context: Context, attrs: AttributeS
     private fun setErrorPassword(password: String) {
         if (password.length <= 6) {
             error = "Password Anda Kurang dari 6 Karakter"
-        } else {
-            clearFocus()
         }
     }
 

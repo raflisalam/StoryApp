@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">StoryApp</string>
+    <string name="hint_form_name">Masukkan nama anda</string>
+    <string name="hint_form_email">Masukkan email anda</string>
+    <string name="hint_form_password">Masukkan password anda</string>
+    <string name="button_register">Daftar</string>
+    <string name="text_form_error">Kolom ini tidak boleh kosong</string>
+    <string name="button_login">Masuk</string>
+    <string name="hint_login_password">password</string>
+    <string name="hint_login_email">email</string>
+    <string name="home_activity">Beranda</string>
+    <string name="post_activity">Postingan baru</string>
+    <string name="detail_activity">Postingan</string>
+    <string name="not_registered_yet">Belum punya akun? <font color="#FF9D5C"><b><u>Silahkan daftar disini!</u></b></font></string>
+    <string name="already_register">Sudah punya akun? <font color="#FF9D5C"><b><u>Silahkan login disini!</u></b></font></string>
+    <string name="btn_logout">Keluar</string>
+    <string name="like">Suka</string>
+    <string name="comment">Komentar</string>
+    <string name="data_notfound">Tidak data stories yang ditemukan!</string>
+    <string name="fail_register">Gagal daftar akun!</string>
+    <string name="register_success">Daftar akun berhasil!</string>
+    <string name="must_loginfirst">Silahkan login terlebih dahulu!</string>
+    <string name="login_success">Login berhasil!</string>
+    <string name="input_file">Silakan masukkan berkas gambar terlebih dahulu.</string>
+    <string name="appwidget_text">STORIES BANNER</string>
+    <string name="empty_text">NO DATA</string>
+    <string name="app_widget_description">This is an app widget description</string>
+
+</resources>

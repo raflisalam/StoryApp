@@ -15,17 +15,20 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
+import com.google.gson.GsonBuilder
 import com.raflisalam.storyapp.R
 import com.raflisalam.storyapp.databinding.ActivityLoginBinding
-import com.raflisalam.storyapp.model.login.LoginUser
+import com.raflisalam.storyapp.model.auth.login.LoginUser
+import com.raflisalam.storyapp.model.auth.login.ResponseError
 import com.raflisalam.storyapp.pref.UserSession
 import com.raflisalam.storyapp.repository.Repository
-import com.raflisalam.storyapp.ui.HomeActivity
 import com.raflisalam.storyapp.ui.costumview.button.ButtonProgress
+import com.raflisalam.storyapp.ui.home.HomeActivity
 import com.raflisalam.storyapp.viewmodel.post.login.LoginViewModel
 import com.raflisalam.storyapp.viewmodel.post.login.LoginViewModelFactory
 import com.raflisalam.storyapp.viewmodel.session.SessionFactoryViewModel
 import com.raflisalam.storyapp.viewmodel.session.SessionViewModel
+import java.io.IOException
 
 class LoginActivity : AppCompatActivity() {
 
@@ -47,7 +50,13 @@ class LoginActivity : AppCompatActivity() {
 
         setupFormLogin()
         setupViewModel()
-        checkSession()
+        saveSession()
+        setupActionBar()
+    }
+
+    private fun setupActionBar() {
+        val actionBar = supportActionBar
+        actionBar?.hide()
     }
 
     private fun setupViewModel() {
@@ -78,60 +87,69 @@ class LoginActivity : AppCompatActivity() {
                         inputPassword.error = getString(R.string.text_form_error)
                     }
                     else -> {
-                        loadingProgress()
                         loginUser(email.toString(), password.toString())
+                        loadingProgress()
                     }
                 }
             }
         }
+        binding.btnBelumDaftar.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+            finish()
+        }
     }
 
     private fun loginUser(email: String, password: String) {
-        val post = LoginUser("raflisalam.dokumen@gmail.com", "rafli12345")
+        val post = LoginUser(email, password)
         viewModel.loginUser(post)
     }
 
     private fun loadingProgress() {
         val button = ButtonProgress(this, btnLogin)
         button.isPressed()
-        viewModel.loginResponse.observe(this) {
-        if (it.isSuccessful) {
-            loginSuccess = true
-            saveSession(loginSuccess)
-            storedDataUser()
-            Handler().postDelayed({
+        viewModel.error().observe(this) { error ->
+            if (error == false) {
+                loginSuccess = true
+                storedDataUser(loginSuccess)
+                Handler().postDelayed({
+                    button.afterProgress()
+                    startActivity()
+                }, 3000)
+            } else {
                 button.afterProgress()
-                startActivity()
-            }, 4000)
-            Log.d("loginSuccess", it.code().toString())
-            Log.d("loginSuccess", it.message().toString())
-        } else {
-            button.afterProgress()
-            Toast.makeText(this, "Invalid email or password!", Toast.LENGTH_SHORT).show()
-            Log.d("loginError", it.code().toString())
-            Log.d("loginError", it.message().toString())
+                Toast.makeText(this, viewModel.message.value, Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun storedDataUser() {
+
+    private fun storedDataUser(loginSession: Boolean) {
         viewModel.getLoginResult().observe(this) { data ->
-            session.setSessionLogin(data.userId!!, data.name!!, data.token!!)
+            session.setSessionLogin(data.token!!, loginSession)
         }
     }
 
-    private fun saveSession(loginSuccess: Boolean) {
-        if (loginSuccess) {
-            val loginPref = getSharedPreferences(NAME_KEY_SESSION, MODE_PRIVATE)
-            val session: SharedPreferences.Editor = loginPref.edit()
-            session.putString(KEY_SESSION, "true")
-            session.apply()
-        } else if (!loginSuccess) {
-            val loginPref = getSharedPreferences(NAME_KEY_SESSION, MODE_PRIVATE)
-            val session: SharedPreferences.Editor = loginPref.edit()
-            session.putString(KEY_SESSION, "false")
-            session.apply()
+    private fun startActivity() {
+        startActivity(Intent(this, HomeActivity::class.java))
+        Toast.makeText(this, getString(R.string.login_success), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun saveSession() {
+        session.getUserSession().observe(this) { loginSuccess ->
+            Log.d("checkResultSession", loginSuccess.toString())
+            if (loginSuccess) {
+                val loginPref = getSharedPreferences(NAME_KEY_SESSION, MODE_PRIVATE)
+                val session: SharedPreferences.Editor = loginPref.edit()
+                session.putString(KEY_SESSION, "true")
+                session.apply()
+            } else if (!loginSuccess) {
+                val loginPref = getSharedPreferences(NAME_KEY_SESSION, MODE_PRIVATE)
+                val session: SharedPreferences.Editor = loginPref.edit()
+                session.putString(KEY_SESSION, "false")
+                session.apply()
+            }
         }
+        checkSession()
     }
 
     private fun checkSession() {
@@ -139,13 +157,10 @@ class LoginActivity : AppCompatActivity() {
         val check = getLoginPref.getString(KEY_SESSION, "")
         if (check.equals("true")) {
             startActivity(Intent(this, HomeActivity::class.java))
+            finish()
         } else if (check.equals("false")){
-            Toast.makeText(this, "Login first!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.must_loginfirst), Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun startActivity() {
-        startActivity(Intent(this, HomeActivity::class.java))
     }
 
     companion object {

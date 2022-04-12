@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">StoryApp</string>
+    <string name="hint_form_name">あなたの名前を入力してください</string>
+    <string name="hint_form_email">メールアドレスを入力してください</string>
+    <string name="hint_form_password">パスワードを入力してください</string>
+    <string name="button_register">登録</string>
+    <string name="text_form_error">この列を空にすることはできません</string>
+    <string name="button_login">ログイン</string>
+    <string name="hint_login_password">パスワード</string>
+    <string name="hint_login_email">Eメール</string>
+    <string name="home_activity">タイムライン</string>
+    <string name="post_activity">新しい投稿</string>
+    <string name="detail_activity">役職</string>
+    <string name="not_registered_yet">まだアカウントをお持ちではありませんか？ <font color="#FF9D5C"><b><u>こちらからサインアップしてください！</u></b></font></string>
+    <string name="already_register">すでにアカウントをお持ちですか？<font color="#FF9D5C"><b><u>ここからサインインしてください！</u></b></font></string>
+    <string name="btn_logout">ログアウト</string>
+    <string name="like">いいね</string>
+    <string name="comment">コメント</string>
+    <string name="data_notfound">ストーリーデータが見つかりません！</string>
+    <string name="fail_register">アカウントの登録に失敗しました！</string>
+    <string name="register_success">登録に成功しました！</string>
+    <string name="must_loginfirst">最初にログインしてください！</string>
+    <string name="login_success">ログイン成功！</string>
+    <string name="input_file">最初に画像ファイルを入力してください</string>
+    <string name="appwidget_text">STORIES BANNER</string>
+    <string name="empty_text">NO DATA</string>
+    <string name="app_widget_description">This is an app widget description</string>
+
+</resources>

@@ -1,4 +1,4 @@
-package com.raflisalam.storyapp.model
+package com.raflisalam.storyapp.model.auth.register
 
 data class RegisterUser(
     val name: String? = null,

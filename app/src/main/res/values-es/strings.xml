@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">StoryApp</string>
+    <string name="hint_form_name">ingresa tu nombre</string>
+    <string name="hint_form_email">ingrese su correo electrónico</string>
+    <string name="hint_form_password">ingresa tu contraseña</string>
+    <string name="button_register">Registro</string>
+    <string name="text_form_error">Esta columna no puede estar vacía</string>
+    <string name="button_login">Acceso</string>
+    <string name="hint_login_password">clave</string>
+    <string name="hint_login_email">email</string>
+    <string name="home_activity">Cronología</string>
+    <string name="post_activity">Nueva publicación</string>
+    <string name="detail_activity">Correo</string>
+    <string name="not_registered_yet">¿Aún no tienes una cuenta? <font color="#FF9D5C"><b><u>Por favor regístrese aquí!</u></b></font></string>
+    <string name="already_register">¿Ya tienes una cuenta? <font color="#FF9D5C"><b><u>¡Inicia sesión aquí!</u></b></font></string>
+    <string name="btn_logout">Cerrar sesión</string>
+    <string name="like">Gustos</string>
+    <string name="comment">Comentario</string>
+    <string name="data_notfound">¡No se encontraron datos de historias!</string>
+    <string name="fail_register">Failed to register account!</string>
+    <string name="register_success">Registro exitoso!</string>
+    <string name="must_loginfirst">¡Por favor ingresa primero!</string>
+    <string name="login_success">Inicio de sesión exitosa!</string>
+    <string name="input_file">Por favor ingrese el archivo de imagen primero</string>
+    <string name="appwidget_text">STORIES BANNER</string>
+    <string name="empty_text">NO DATA</string>
+    <string name="app_widget_description">This is an app widget description</string>
+
+</resources>

@@ -1,4 +1,4 @@
-package com.raflisalam.storyapp.model.login
+package com.raflisalam.storyapp.model.auth.login
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

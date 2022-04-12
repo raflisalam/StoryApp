@@ -29,6 +29,5 @@ class ButtonProgress(context: Context, view: View) {
         constraintLayout.setBackgroundColor(cardView.resources.getColor(R.color.button_focused))
         progressBar.visibility = View.INVISIBLE
         textView.visibility = View.VISIBLE
-
     }
 }

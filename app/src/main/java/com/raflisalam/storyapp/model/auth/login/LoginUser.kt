@@ -1,4 +1,4 @@
-package com.raflisalam.storyapp.model.login
+package com.raflisalam.storyapp.model.auth.login
 
 data class LoginUser (
     val email: String? = null,

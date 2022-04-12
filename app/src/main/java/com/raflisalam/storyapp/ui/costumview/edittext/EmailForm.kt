@@ -42,12 +42,13 @@ class EmailForm @JvmOverloads constructor(context: Context, attrs: AttributeSet?
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s.toString().isNotEmpty()) showClearButton() else hideClearButton()
             }
 
             override fun afterTextChanged(s: Editable?) {
                 val email = s.toString()
-                if (email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                if (email.isEmpty()) {
+                    clearFocus()
+                } else if (email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     Toast.makeText(context,"Valid email address",Toast.LENGTH_SHORT).show()
                 } else {
                     error = "Format email salah"

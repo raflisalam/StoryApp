@@ -1,11 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">StoryApp</string>
-    <string name="hint_form_name">Masukkan nama anda</string>
-    <string name="hint_form_email">Masukkan email anda</string>
-    <string name="hint_form_password">Masukkan password anda</string>
-    <string name="button_register">Daftar</string>
-    <string name="text_form_error">Kolom ini tidak boleh kosong</string>
-    <string name="button_login">Masuk</string>
+    <string name="hint_form_name">input your name</string>
+    <string name="hint_form_email">input your email</string>
+    <string name="hint_form_password">input your password</string>
+    <string name="button_register">Register</string>
+    <string name="text_form_error">This column cannot be empty</string>
+    <string name="button_login">Login</string>
     <string name="hint_login_password">password</string>
     <string name="hint_login_email">email</string>
+    <string name="home_activity">Timeline</string>
+    <string name="post_activity">New post</string>
+    <string name="detail_activity">Post</string>
+    <string name="not_registered_yet">Don\'t have an account yet? <font color="#FF9D5C"><b><u>Please sign up here!</u></b></font></string>
+    <string name="already_register">Already have an account? <font color="#FF9D5C"><b><u>Please sign in here!</u></b></font></string>
+    <string name="btn_logout">Logout</string>
+    <string name="like">Likes</string>
+    <string name="comment">Comment</string>
+    <string name="data_notfound">No stories data found!</string>
+    <string name="fail_register">Failed to register account!</string>
+    <string name="register_success">Register successful!</string>
+    <string name="must_loginfirst">Please login first!</string>
+    <string name="login_success">Login successful!</string>
+    <string name="input_file">Please enter the image file first</string>
+    <string name="appwidget_text">STORIES BANNER</string>
+    <string name="empty_text">NO DATA</string>
+    <string name="app_widget_description">This is an app widget description</string>
 </resources>
