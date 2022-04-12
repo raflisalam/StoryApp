@@ -17,26 +17,12 @@ class UserSession private constructor(private val sessionDataStore: DataStore<Pr
         }
     }
 
-//    fun getUserToken(): Flow<String> {
-//        return sessionDataStore.data.map { preferences ->
-//            preferences[USER_TOKEN] ?: ""
-//        }
-//    }
-
     fun getUserSession(): Flow<Boolean> {
         return sessionDataStore.data.map { preferences ->
             preferences[USER_SESSION] ?: false
         }
     }
 
-//    val userIdSession: Flow<String> = sessionDataStore.data.map { preferences ->
-//        preferences[USER_ID_SESSION] ?: ""
-//    }
-//
-//    val userName: Flow<String> = sessionDataStore.data.map { preferences ->
-//        preferences[USER_ID_SESSION] ?: ""
-//    }
-//
     val userToken: Flow<String> = sessionDataStore.data.map { preferences ->
         preferences[USER_TOKEN] ?: ""
     }

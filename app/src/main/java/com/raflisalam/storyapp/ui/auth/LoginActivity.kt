@@ -15,20 +15,18 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import com.google.gson.GsonBuilder
 import com.raflisalam.storyapp.R
 import com.raflisalam.storyapp.databinding.ActivityLoginBinding
 import com.raflisalam.storyapp.model.auth.login.LoginUser
-import com.raflisalam.storyapp.model.auth.login.ResponseError
 import com.raflisalam.storyapp.pref.UserSession
 import com.raflisalam.storyapp.repository.Repository
 import com.raflisalam.storyapp.ui.costumview.button.ButtonProgress
 import com.raflisalam.storyapp.ui.home.HomeActivity
 import com.raflisalam.storyapp.viewmodel.post.login.LoginViewModel
-import com.raflisalam.storyapp.viewmodel.post.login.LoginViewModelFactory
 import com.raflisalam.storyapp.viewmodel.session.SessionFactoryViewModel
 import com.raflisalam.storyapp.viewmodel.session.SessionViewModel
-import java.io.IOException
+import java.util.concurrent.Executor
+import java.util.concurrent.Executors
 
 class LoginActivity : AppCompatActivity() {
 
@@ -60,9 +58,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel() {
-        val repository = Repository()
-        val viewModelFactory = LoginViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, viewModelFactory)[LoginViewModel::class.java]
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         userSession = UserSession.newInstance(dataStore)
         session = ViewModelProvider(this, SessionFactoryViewModel(userSession))[SessionViewModel::class.java]
 
@@ -77,7 +73,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setupButtonLogin(email: Editable?, password: Editable?) {
+        val button = ButtonProgress(this, btnLogin)
         btnLogin.setOnClickListener {
+            button.isPressed()
             binding.apply {
                 when {
                     TextUtils.isEmpty(inputEmail.toString()) -> {
@@ -106,7 +104,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loadingProgress() {
         val button = ButtonProgress(this, btnLogin)
-        button.isPressed()
         viewModel.error().observe(this) { error ->
             if (error == false) {
                 loginSuccess = true
@@ -116,8 +113,10 @@ class LoginActivity : AppCompatActivity() {
                     startActivity()
                 }, 3000)
             } else {
-                button.afterProgress()
-                Toast.makeText(this, viewModel.message.value, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show()
+                Handler().postDelayed({
+                    button.afterProgress()
+                }, 3000)
             }
         }
     }

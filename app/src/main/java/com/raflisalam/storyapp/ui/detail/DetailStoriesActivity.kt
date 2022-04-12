@@ -1,10 +1,9 @@
 package com.raflisalam.storyapp.ui.detail
 
-import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.text.format.DateUtils
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.raflisalam.storyapp.R

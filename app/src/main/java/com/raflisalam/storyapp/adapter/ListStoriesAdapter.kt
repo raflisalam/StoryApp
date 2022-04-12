@@ -10,7 +10,6 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.raflisalam.storyapp.R
 import com.raflisalam.storyapp.databinding.ListStoriesBinding
 import com.raflisalam.storyapp.model.stories.get.StoriesUsers
 import com.raflisalam.storyapp.ui.detail.DetailStoriesActivity

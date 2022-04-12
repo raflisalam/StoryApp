@@ -11,17 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StoryApp">
-        <receiver
-            android:name=".ui.widget.ImageStoriesWidget"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/image_stories_widget_info" />
-        </receiver>
 
         <activity
             android:name=".ui.stories.PostStoriesActivity"

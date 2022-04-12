@@ -23,7 +23,4 @@
     <string name="must_loginfirst">Please login first!</string>
     <string name="login_success">Login successful!</string>
     <string name="input_file">Please enter the image file first</string>
-    <string name="appwidget_text">STORIES BANNER</string>
-    <string name="empty_text">NO DATA</string>
-    <string name="app_widget_description">This is an app widget description</string>
 </resources>

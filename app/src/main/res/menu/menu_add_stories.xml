@@ -13,8 +13,8 @@
             app:showAsAction="always" />
         <item android:id="@+id/button_logout"
             android:title="@string/btn_logout"
-            android:icon="@drawable/ic_baseline_more_vert_24"
-            app:showAsAction="always"/>
+            android:icon="@drawable/ic_logout"
+            app:showAsAction="ifRoom"/>
     </group>
 
 </menu>

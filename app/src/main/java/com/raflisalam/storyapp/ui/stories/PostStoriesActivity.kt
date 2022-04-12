@@ -8,7 +8,6 @@ import android.text.Html
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
@@ -18,9 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.raflisalam.storyapp.R
-import com.raflisalam.storyapp.api.ApiClient
 import com.raflisalam.storyapp.databinding.ActivityPostStoriesBinding
-import com.raflisalam.storyapp.model.stories.post.PostStoriesResponse
 import com.raflisalam.storyapp.pref.UserSession
 import com.raflisalam.storyapp.repository.Repository
 import com.raflisalam.storyapp.ui.home.HomeActivity
@@ -29,16 +26,12 @@ import com.raflisalam.storyapp.viewmodel.post.stories.PostStoriesViewModel
 import com.raflisalam.storyapp.viewmodel.post.stories.PostStoriesViewModelFactory
 import com.raflisalam.storyapp.viewmodel.session.SessionFactoryViewModel
 import com.raflisalam.storyapp.viewmodel.session.SessionViewModel
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.io.File
 
 class PostStoriesActivity : AppCompatActivity() {
