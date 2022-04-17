@@ -10,8 +10,9 @@ import kotlinx.coroutines.flow.map
 
 class UserSession private constructor(private val sessionDataStore: DataStore<Preferences>) {
 
-    suspend fun setSessionUser(token: String, session: Boolean) {
+    suspend fun setSessionUser(name: String, token: String, session: Boolean) {
         sessionDataStore.edit { preferences ->
+            preferences[USER_NAME] = name
             preferences[USER_TOKEN] = token
             preferences[USER_SESSION] = session
         }
@@ -23,11 +24,16 @@ class UserSession private constructor(private val sessionDataStore: DataStore<Pr
         }
     }
 
+    val userName: Flow<String> = sessionDataStore.data.map { preferences ->
+        preferences[USER_NAME] ?: ""
+    }
+
     val userToken: Flow<String> = sessionDataStore.data.map { preferences ->
         preferences[USER_TOKEN] ?: ""
     }
 
     companion object {
+        val USER_NAME = stringPreferencesKey("name")
         val USER_TOKEN = stringPreferencesKey("token")
         val USER_SESSION = booleanPreferencesKey("session")
 

@@ -151,11 +151,21 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun resetSessionUser() {
-        session.setSessionLogin("", false)
+        session.setSessionLogin("", "",false)
         val logoutPref = getSharedPreferences(NAME_KEY_SESSION, MODE_PRIVATE)
         val session: SharedPreferences.Editor = logoutPref.edit()
         session.putString(KEY_SESSION, "false")
         session.apply()
+
+        val tokenPref = getSharedPreferences(NAME_KEY_TOKEN, MODE_PRIVATE)
+        val token: SharedPreferences.Editor = tokenPref.edit()
+        token.putString(KEY_TOKEN, "")
+        token.apply()
+
+        val userPref = getSharedPreferences(NAME_KEY_USERNAME, MODE_PRIVATE)
+        val name: SharedPreferences.Editor = userPref.edit()
+        name.putString(KEY_USERNAME, "")
+        name.apply()
     }
 
     private fun showLoading(loading: Boolean){
@@ -164,6 +174,12 @@ class HomeActivity : AppCompatActivity() {
     }
 
     companion object {
+        private const val NAME_KEY_TOKEN = "user_token"
+        private const val KEY_TOKEN = "token"
+
+        private const val NAME_KEY_USERNAME = "user_name"
+        private const val KEY_USERNAME = "name"
+
         private const val NAME_KEY_SESSION = "user_session"
         private const val KEY_SESSION = "session"
     }

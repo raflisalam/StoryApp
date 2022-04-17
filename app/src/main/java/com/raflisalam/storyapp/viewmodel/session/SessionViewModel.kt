@@ -9,15 +9,11 @@ import kotlinx.coroutines.launch
 
 class SessionViewModel(private val preferences: UserSession) : ViewModel() {
 
-    fun setSessionLogin(token: String, session: Boolean) {
+    fun setSessionLogin(name: String, token: String, session: Boolean) {
         viewModelScope.launch {
-            preferences.setSessionUser(token, session)
+            preferences.setSessionUser(name, token, session)
         }
     }
-
-//    fun getUserToken(): LiveData<String> {
-//        return preferences.getUserToken().asLiveData()
-//    }
 
     fun getUserSession(): LiveData<Boolean> {
         return preferences.getUserSession().asLiveData()

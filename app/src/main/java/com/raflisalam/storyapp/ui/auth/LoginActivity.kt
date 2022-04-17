@@ -19,14 +19,11 @@ import com.raflisalam.storyapp.R
 import com.raflisalam.storyapp.databinding.ActivityLoginBinding
 import com.raflisalam.storyapp.model.auth.login.LoginUser
 import com.raflisalam.storyapp.pref.UserSession
-import com.raflisalam.storyapp.repository.Repository
 import com.raflisalam.storyapp.ui.costumview.button.ButtonProgress
 import com.raflisalam.storyapp.ui.home.HomeActivity
 import com.raflisalam.storyapp.viewmodel.post.login.LoginViewModel
 import com.raflisalam.storyapp.viewmodel.session.SessionFactoryViewModel
 import com.raflisalam.storyapp.viewmodel.session.SessionViewModel
-import java.util.concurrent.Executor
-import java.util.concurrent.Executors
 
 class LoginActivity : AppCompatActivity() {
 
@@ -104,7 +101,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loadingProgress() {
         val button = ButtonProgress(this, btnLogin)
-        viewModel.error().observe(this) { error ->
+        val dataError = viewModel.error()
+        dataError.observe(this) { error ->
             if (error == false) {
                 loginSuccess = true
                 storedDataUser(loginSuccess)
@@ -113,9 +111,10 @@ class LoginActivity : AppCompatActivity() {
                     startActivity()
                 }, 3000)
             } else {
-                Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show()
                 Handler().postDelayed({
+                    Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show()
                     button.afterProgress()
+                    dataError.removeObservers(this)
                 }, 3000)
             }
         }
@@ -124,7 +123,16 @@ class LoginActivity : AppCompatActivity() {
 
     private fun storedDataUser(loginSession: Boolean) {
         viewModel.getLoginResult().observe(this) { data ->
-            session.setSessionLogin(data.token!!, loginSession)
+            session.setSessionLogin(data.name!!, data.token!!, loginSession)
+            val tokenPref = getSharedPreferences(NAME_KEY_TOKEN, MODE_PRIVATE)
+            val token: SharedPreferences.Editor = tokenPref.edit()
+            token.putString(KEY_TOKEN, data.token)
+            token.apply()
+
+            val namePref = getSharedPreferences(NAME_KEY_USERNAME, MODE_PRIVATE)
+            val name: SharedPreferences.Editor = namePref.edit()
+            name.putString(KEY_USERNAME, data.name)
+            name.apply()
         }
     }
 
@@ -163,6 +171,12 @@ class LoginActivity : AppCompatActivity() {
     }
 
     companion object {
+        private const val NAME_KEY_TOKEN = "user_token"
+        private const val KEY_TOKEN = "token"
+
+        private const val NAME_KEY_USERNAME = "user_name"
+        private const val KEY_USERNAME = "name"
+
         private const val NAME_KEY_SESSION = "user_session"
         private const val KEY_SESSION = "session"
     }
