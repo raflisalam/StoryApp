@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -19,7 +20,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.raflisalam.storyapp.R
 import com.raflisalam.storyapp.databinding.ActivityPostStoriesBinding
 import com.raflisalam.storyapp.pref.UserSession
-import com.raflisalam.storyapp.repository.Repository
 import com.raflisalam.storyapp.ui.home.HomeActivity
 import com.raflisalam.storyapp.ui.utils.convertUriToFile
 import com.raflisalam.storyapp.viewmodel.post.stories.PostStoriesViewModel
@@ -39,7 +39,9 @@ class PostStoriesActivity : AppCompatActivity() {
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "session")
 
     private lateinit var binding: ActivityPostStoriesBinding
-    private lateinit var viewModel: PostStoriesViewModel
+    private val viewModel: PostStoriesViewModel by viewModels {
+        PostStoriesViewModelFactory.getInstance(this)
+    }
     private lateinit var session: SessionViewModel
     private lateinit var userSession: UserSession
 
@@ -57,10 +59,6 @@ class PostStoriesActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel() {
-        val repository = Repository()
-        val viewModelFactory = PostStoriesViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, viewModelFactory)[PostStoriesViewModel::class.java]
-
         userSession = UserSession.newInstance(dataStore)
         session = ViewModelProvider(this, SessionFactoryViewModel(userSession))[SessionViewModel::class.java]
 
@@ -126,22 +124,17 @@ class PostStoriesActivity : AppCompatActivity() {
             val getTokenPref = getSharedPreferences(NAME_KEY_TOKEN, MODE_PRIVATE)
             val token = getTokenPref.getString(KEY_TOKEN, "")
 
-            viewModel.postStories("Bearer $token", imageMultipart, description)
-            viewModel.postResponse.observe(this) { response ->
-                if (response.isSuccessful) {
+            viewModel.postStories(token!!, imageMultipart, description)
+
+            viewModel.isSuccess.observe(this) { isSuccess ->
+                if (isSuccess) {
                     startActivity(Intent(this, HomeActivity::class.java))
                     finish()
-                    Log.d("postSuccess", response.message())
-                    Log.d("postSuccess", response.body()?.message.toString())
-                    Toast.makeText(this, response.body()?.message, Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this, response.message(), Toast.LENGTH_SHORT).show()
-                    Log.d("postFail", response.message())
-                    Log.d("postFail", response.body()?.message.toString())
                 }
             }
-        } else {
-            Toast.makeText(this, getString(R.string.input_file), Toast.LENGTH_SHORT).show()
+            viewModel.message.observe(this) { message ->
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

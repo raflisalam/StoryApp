@@ -1,22 +1,24 @@
 package com.raflisalam.storyapp.viewmodel.get
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.raflisalam.storyapp.data.repository.StoriesRepo
 import com.raflisalam.storyapp.model.stories.get.StoriesResponse
 import com.raflisalam.storyapp.model.stories.get.StoriesUsers
-import com.raflisalam.storyapp.repository.Repository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class StoriesViewModel(private val repository: Repository): ViewModel() {
+class StoriesViewModel(private val repository: StoriesRepo): ViewModel() {
 
-    var storiesResponse: MutableLiveData<Response<StoriesResponse>> = MutableLiveData()
-    private val listStories: MutableLiveData<List<StoriesUsers>> = MutableLiveData()
+    private val _storiesResponse: MutableLiveData<Response<StoriesResponse>> = MutableLiveData()
+    val storiesResponse: LiveData<Response<StoriesResponse>> = _storiesResponse
 
-    private val _loading = MutableLiveData<Boolean>()
+    private val _listStories: MutableLiveData<List<StoriesUsers>> = MutableLiveData()
+    val listStories: LiveData<List<StoriesUsers>> = _listStories
+
+    private val _loading: MutableLiveData<Boolean> = MutableLiveData()
     val loading: LiveData<Boolean> = _loading
 
     fun getStories(authToken: String) {
@@ -25,15 +27,9 @@ class StoriesViewModel(private val repository: Repository): ViewModel() {
             val response = repository.storiesUsers(authToken)
             if (response.isSuccessful) {
                 _loading.value = false
-                listStories.value = response.body()?.listStories
-                storiesResponse.value = response
+                _listStories.value = response.body()?.listStories
+                _storiesResponse.value = response
             }
-            Log.d("resultStories", listStories.value.toString())
         }
     }
-
-    fun getDataStories(): LiveData<List<StoriesUsers>> {
-        return listStories
-    }
-
 }

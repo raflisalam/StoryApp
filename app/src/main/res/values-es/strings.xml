@@ -18,10 +18,14 @@
     <string name="like">Gustos</string>
     <string name="comment">Comentario</string>
     <string name="data_notfound">¡No se encontraron datos de historias!</string>
-    <string name="fail_register">Failed to register account!</string>
+    <string name="fail_register">¡Error al registrar la cuenta!</string>
+    <string name="fail_login">Correo electrónico o contraseña no válidos</string>
     <string name="register_success">Registro exitoso!</string>
     <string name="must_loginfirst">¡Por favor ingresa primero!</string>
     <string name="login_success">Inicio de sesión exitosa!</string>
     <string name="input_file">Por favor ingrese el archivo de imagen primero</string>
+    <string name="title_home">Home</string>
+    <string name="title_maps">Maps</string>
+    <string name="retry">intentar otra vez</string>
 
 </resources>

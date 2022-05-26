@@ -7,28 +7,24 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.text.Html
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.raflisalam.storyapp.R
-import com.raflisalam.storyapp.adapter.ListStoriesAdapter
 import com.raflisalam.storyapp.databinding.ActivityHomeBinding
 import com.raflisalam.storyapp.pref.UserSession
-import com.raflisalam.storyapp.repository.Repository
 import com.raflisalam.storyapp.ui.auth.LoginActivity
 import com.raflisalam.storyapp.ui.stories.PostStoriesActivity
-import com.raflisalam.storyapp.viewmodel.get.StoriesFactoryViewModel
-import com.raflisalam.storyapp.viewmodel.get.StoriesViewModel
 import com.raflisalam.storyapp.viewmodel.session.SessionFactoryViewModel
 import com.raflisalam.storyapp.viewmodel.session.SessionViewModel
 import java.io.IOException
@@ -38,10 +34,8 @@ class HomeActivity : AppCompatActivity() {
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "session")
 
     private lateinit var binding: ActivityHomeBinding
-    private lateinit var userSession: UserSession
-    private lateinit var adapter: ListStoriesAdapter
-    private lateinit var viewModel: StoriesViewModel
     private lateinit var session: SessionViewModel
+    private lateinit var userSession: UserSession
     private lateinit var uri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,9 +43,34 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupActionBar()
         setupViewModel()
-        setupAdapter()
+        setupActionBar()
+        setupBottomNavigation()
+    }
+
+    private fun setupViewModel() {
+        userSession = UserSession.newInstance(this.dataStore)
+        session = ViewModelProvider(this, SessionFactoryViewModel(userSession))[SessionViewModel::class.java]
+    }
+
+    private fun setupBottomNavigation() {
+        val navView: BottomNavigationView = binding.navView
+
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home, R.id.navigation_maps, R.id.navigation_paging
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
+    }
+
+    private fun setupActionBar() {
+        val actionBar = supportActionBar
+        actionBar?.show()
+        actionBar?.title = getString(R.string.home_activity)
+        actionBar?.title = (Html.fromHtml("<font color=\"black\">" + getString(R.string.home_activity) + "</font" ))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -70,6 +89,7 @@ class HomeActivity : AppCompatActivity() {
             }
             R.id.button_logout -> {
                 logout()
+                finish()
             }
             R.id.button_settings -> {
                 startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
@@ -92,58 +112,6 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupActionBar() {
-        val actionBar = supportActionBar
-        actionBar?.title = getString(R.string.home_activity)
-        actionBar?.title = (Html.fromHtml("<font color=\"black\">" + getString(R.string.home_activity) + "</font" ))
-    }
-
-    private fun setupViewModel() {
-        val repository = Repository()
-        val viewModelFactory = StoriesFactoryViewModel(repository)
-        viewModel = ViewModelProvider(this, viewModelFactory)[StoriesViewModel::class.java]
-        userSession = UserSession.newInstance(dataStore)
-        session = ViewModelProvider(this, SessionFactoryViewModel(userSession))[SessionViewModel::class.java]
-
-        viewModel.loading.observe(this){
-            showLoading(it)
-        }
-
-        userSession.userToken.asLiveData().observe(this) { token ->
-            token?.let {
-                viewModel.getStories("Bearer $token")
-            }
-        }
-    }
-
-    private fun setupAdapter() {
-        adapter = ListStoriesAdapter()
-        viewModel.getDataStories().observe(this) { data ->
-            if (data != null) {
-                adapter.setListStories(data)
-                adapter.notifyDataSetChanged()
-                showListStories()
-            } else {
-                Toast.makeText(this, getString(R.string.data_notfound), Toast.LENGTH_SHORT).show()
-            }
-        }
-        viewModel.storiesResponse.observe(this) { response ->
-            if (response.isSuccessful) {
-                Log.d("getStories", response.message())
-            } else {
-                Toast.makeText(this, response.message(), Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun showListStories() {
-        binding.apply {
-            rvStories.layoutManager = LinearLayoutManager(this@HomeActivity)
-            rvStories.setHasFixedSize(true)
-            rvStories.adapter = adapter
-        }
-    }
-
     private fun logout() {
         resetSessionUser()
         startActivity(Intent(this, LoginActivity::class.java))
@@ -161,24 +129,11 @@ class HomeActivity : AppCompatActivity() {
         val token: SharedPreferences.Editor = tokenPref.edit()
         token.putString(KEY_TOKEN, "")
         token.apply()
-
-        val userPref = getSharedPreferences(NAME_KEY_USERNAME, MODE_PRIVATE)
-        val name: SharedPreferences.Editor = userPref.edit()
-        name.putString(KEY_USERNAME, "")
-        name.apply()
-    }
-
-    private fun showLoading(loading: Boolean){
-        if(loading) binding.loading.visibility = View.VISIBLE
-        else binding.loading.visibility = View.GONE
     }
 
     companion object {
         private const val NAME_KEY_TOKEN = "user_token"
         private const val KEY_TOKEN = "token"
-
-        private const val NAME_KEY_USERNAME = "user_name"
-        private const val KEY_USERNAME = "name"
 
         private const val NAME_KEY_SESSION = "user_session"
         private const val KEY_SESSION = "session"

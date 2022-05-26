@@ -36,7 +36,19 @@ interface ApiServices {
 
     @GET("stories")
     suspend fun storiesUser(
-        @Header("Authorization") authToken: String
+        @Header("Authorization") authToken: String,
     ): Response<StoriesResponse>
 
+    @GET("stories")
+    suspend fun pagingStories(
+        @Header("Authorization") authToken: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): StoriesResponse
+
+    @GET("stories")
+    suspend fun storiesMaps(
+        @Header("Authorization") authToken: String,
+        @Query("location") location: Int
+    ): Response<StoriesResponse>
 }

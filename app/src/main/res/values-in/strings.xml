@@ -19,9 +19,13 @@
     <string name="comment">Komentar</string>
     <string name="data_notfound">Tidak data stories yang ditemukan!</string>
     <string name="fail_register">Gagal daftar akun!</string>
+    <string name="fail_login">Email atau password tidak valid</string>
     <string name="register_success">Daftar akun berhasil!</string>
     <string name="must_loginfirst">Silahkan login terlebih dahulu!</string>
     <string name="login_success">Login berhasil!</string>
     <string name="input_file">Silakan masukkan berkas gambar terlebih dahulu.</string>
+    <string name="title_home">Home</string>
+    <string name="title_maps">Maps</string>
+    <string name="retry">Coba ulang</string>
 
 </resources>

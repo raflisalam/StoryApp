@@ -5,15 +5,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.raflisalam.storyapp.R
 import com.raflisalam.storyapp.databinding.ActivityRegisterBinding
 import com.raflisalam.storyapp.model.auth.register.RegisterUser
-import com.raflisalam.storyapp.repository.Repository
 import com.raflisalam.storyapp.ui.costumview.button.ButtonProgress
 import com.raflisalam.storyapp.viewmodel.post.register.RegisterViewModel
 import com.raflisalam.storyapp.viewmodel.post.register.RegisterViewModelFactory
@@ -21,7 +19,10 @@ import com.raflisalam.storyapp.viewmodel.post.register.RegisterViewModelFactory
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
-    private lateinit var viewModel: RegisterViewModel
+    private val viewModel: RegisterViewModel by viewModels {
+        RegisterViewModelFactory.getInstance(this)
+    }
+
     private lateinit var btnRegister: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +33,6 @@ class RegisterActivity : AppCompatActivity() {
         btnRegister = findViewById(R.id.btnRegister)
 
         setupFormRegister()
-        setupViewModel()
         setupActionBar()
     }
 
@@ -41,11 +41,13 @@ class RegisterActivity : AppCompatActivity() {
         actionBar?.hide()
     }
 
+/*
     private fun setupViewModel() {
-        val repository = Repository()
+        val repository = Repository(this, )
         val viewModelFactory = RegisterViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[RegisterViewModel::class.java]
     }
+*/
 
     private fun setupFormRegister() {
         binding.apply {
@@ -90,18 +92,16 @@ class RegisterActivity : AppCompatActivity() {
     private fun loadingProgress() {
         val button = ButtonProgress(this, btnRegister)
         button.isPressed()
-        viewModel.registerResponse.observe(this) {
-            if (it.isSuccessful) {
+        viewModel.error.observe(this) { success ->
+            if (success) {
                 Handler().postDelayed({
                     button.afterProgress()
                     startActivity()
                 }, 3000)
-            } else {
-                button.afterProgress()
-                Toast.makeText(this, getString(R.string.fail_register), Toast.LENGTH_SHORT).show()
-                Log.d("registerError", it.code().toString())
-                Log.d("registerError", it.message().toString())
             }
+        }
+        viewModel.message.observe(this) { message ->
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
     }
 

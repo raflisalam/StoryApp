@@ -19,9 +19,13 @@
     <string name="comment">コメント</string>
     <string name="data_notfound">ストーリーデータが見つかりません！</string>
     <string name="fail_register">アカウントの登録に失敗しました！</string>
+    <string name="fail_login">無効なメールアドレスまたはパスワード</string>
     <string name="register_success">登録に成功しました！</string>
     <string name="must_loginfirst">最初にログインしてください！</string>
     <string name="login_success">ログイン成功！</string>
     <string name="input_file">最初に画像ファイルを入力してください</string>
+    <string name="title_home">Home</string>
+    <string name="title_maps">Maps</string>
+    <string name="retry">再試行</string>
 
 </resources>

@@ -12,17 +12,23 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel: ViewModel() {
 
-    private val loginResult: MutableLiveData<LoginResult> = MutableLiveData()
-    private val _error = MutableLiveData<Boolean>()
+    private val _loginResult: MutableLiveData<LoginResult> = MutableLiveData()
+    val loginResult: LiveData<LoginResult> = _loginResult
 
-    fun loginUser(loginUser: LoginUser) {
+    private val _error: MutableLiveData<Boolean> = MutableLiveData()
+    val error: LiveData<Boolean> = _error
+
+    private val _message: MutableLiveData<String> = MutableLiveData()
+    val message: LiveData<String> = _message
+
+  fun loginUser(loginUser: LoginUser) {
         ApiClient.instance.loginUser(loginUser).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
                     _error.postValue(response.body()?.error)
-                    loginResult.postValue(response.body()?.authentication!!)
+                    _loginResult.postValue(response.body()?.authentication!!)
                 } else {
                     _error.postValue(response.body()?.error)
                 }
@@ -33,14 +39,6 @@ class LoginViewModel : ViewModel() {
             }
 
         })
-    }
-
-    fun error(): LiveData<Boolean> {
-        return _error
-    }
-
-    fun getLoginResult(): LiveData<LoginResult> {
-        return loginResult
     }
 
 }

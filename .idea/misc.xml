@@ -19,22 +19,32 @@
         <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.1025" />
         <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/drawable/ic_comment.xml" value="0.1025" />
         <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/drawable/ic_heart.xml" value="0.1555" />
+        <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1705" />
         <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/drawable/ic_logout.xml" value="0.1555" />
+        <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/drawable/ic_maps.xml" value="0.1705" />
         <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/drawable/ic_settings.xml" value="0.1555" />
         <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/drawable/ic_upload.xml" value="0.1555" />
         <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/activity_detail_stories.xml" value="0.25" />
-        <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/activity_home.xml" value="0.1" />
+        <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/activity_home.xml" value="0.2" />
         <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/activity_login.xml" value="0.25" />
-        <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/activity_post_stories.xml" value="0.14" />
         <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.1308876811594203" />
         <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/button_progress.xml" value="0.18" />
         <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/button_progress_login.xml" value="0.1308876811594203" />
         <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/button_progress_register.xml" value="0.22" />
+        <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/fragment_dashboard.xml" value="0.2157258064516129" />
+        <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/fragment_home.xml" value="0.2157258064516129" />
+        <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/fragment_maps.xml" value="0.2157258064516129" />
+        <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/fragment_maps2.xml" value="0.2421875" />
+        <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/fragment_notifications.xml" value="0.2421875" />
+        <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/fragment_paging.xml" value="0.21841397849462366" />
         <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/image_stories_widget.xml" value="0.19422043010752688" />
+        <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/item_loading.xml" value="0.75" />
         <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/list_stories.xml" value="0.22" />
         <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/layout/tes.xml" value="0.18" />
+        <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2421875" />
         <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/menu/menu_add_stories.xml" value="0.5" />
         <entry key="..\:/bangkit 2/StoryApp/app/src/main/res/menu/menu_upload_stories.xml" value="0.22" />
       </map>

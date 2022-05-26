@@ -24,10 +24,6 @@ class UserSession private constructor(private val sessionDataStore: DataStore<Pr
         }
     }
 
-    val userName: Flow<String> = sessionDataStore.data.map { preferences ->
-        preferences[USER_NAME] ?: ""
-    }
-
     val userToken: Flow<String> = sessionDataStore.data.map { preferences ->
         preferences[USER_TOKEN] ?: ""
     }

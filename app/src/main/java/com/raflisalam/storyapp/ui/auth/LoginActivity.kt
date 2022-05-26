@@ -101,7 +101,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loadingProgress() {
         val button = ButtonProgress(this, btnLogin)
-        val dataError = viewModel.error()
+        val dataError = viewModel.error
         dataError.observe(this) { error ->
             if (error == false) {
                 loginSuccess = true
@@ -122,7 +122,7 @@ class LoginActivity : AppCompatActivity() {
 
 
     private fun storedDataUser(loginSession: Boolean) {
-        viewModel.getLoginResult().observe(this) { data ->
+        viewModel.loginResult.observe(this) { data ->
             session.setSessionLogin(data.name!!, data.token!!, loginSession)
             val tokenPref = getSharedPreferences(NAME_KEY_TOKEN, MODE_PRIVATE)
             val token: SharedPreferences.Editor = tokenPref.edit()
@@ -165,7 +165,7 @@ class LoginActivity : AppCompatActivity() {
         if (check.equals("true")) {
             startActivity(Intent(this, HomeActivity::class.java))
             finish()
-        } else if (check.equals("false")){
+        } else if (check.equals("false")) {
             Toast.makeText(this, getString(R.string.must_loginfirst), Toast.LENGTH_SHORT).show()
         }
     }
